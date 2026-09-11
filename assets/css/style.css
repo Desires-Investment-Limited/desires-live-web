@@ -1379,3 +1379,32 @@ section {
     padding: 3px 0;
   }
 }
+
+/*--------------------------------------------------------------
+# Language Switcher
+--------------------------------------------------------------*/
+.lang-switcher select {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  color: #4e4039;
+  background: #fff;
+  cursor: pointer;
+}
+
+.lang-switcher select:focus {
+  outline: none;
+  border-color: #eb5d1e;
+}
+
+@media (max-width: 991px) {
+  .lang-switcher {
+    margin-right: 50px;
+  }
+  .lang-switcher select {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+}

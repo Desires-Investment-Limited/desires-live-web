@@ -183,3 +183,69 @@
   });
 
 })(jQuery);
+
+// ================= LANGUAGE SWITCHER =================
+
+$(document).ready(function () {
+
+    const switcher = document.getElementById("languageSwitcher");
+
+    if (!switcher) return;
+
+    function translatePage(lang) {
+
+        if (!window.translations) {
+            console.error("Translations file not loaded");
+            return;
+        }
+
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+
+            const key = el.dataset.i18n;
+
+            if (translations[lang] && translations[lang][key]) {
+                el.textContent = translations[lang][key];
+            }
+
+        });
+
+
+        if (translations[lang].page_title) {
+            document.title = translations[lang].page_title;
+        }
+
+
+        const meta = document.querySelector(
+            "meta[name='description']"
+        );
+
+        if(meta && translations[lang].description){
+            meta.content = translations[lang].description;
+        }
+
+    }
+
+
+    switcher.addEventListener("change", function(){
+
+        const lang = this.value;
+
+        localStorage.setItem(
+            "site_lang",
+            lang
+        );
+
+        translatePage(lang);
+
+    });
+
+
+    const savedLang =
+        localStorage.getItem("site_lang") || "en";
+
+
+    switcher.value = savedLang;
+
+    translatePage(savedLang);
+
+});
